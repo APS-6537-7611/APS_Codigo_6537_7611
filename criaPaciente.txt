@@ -1,0 +1,140 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+using System.Collections;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace projectFinal
+{
+    
+    public partial class criaPaciente : Form
+    {
+        private Pacientes objPaciente;
+       
+
+
+        public criaPaciente()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            this.Hide();
+            
+               
+            
+        }
+
+        private void criaPaciente_Load(object sender, EventArgs e)
+        {
+           
+            
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string aux = textBox1.Text.ToString();
+            int num = int.Parse(aux);
+            //string nomef = comboBox2.SelectedItem.ToString();
+            string aux1 = textBox5.Text.ToString();
+            int num1 = int.Parse(aux1);
+            string aux2 = textBox6.Text.ToString();
+            int num2 = int.Parse(aux2);
+            string aux4 = textBox8.Text.ToString();
+            int num4 = int.Parse(aux4);
+            string aux5 = textBox9.Text.ToString();
+            int num5 = int.Parse(aux5);
+            string sex = comboBox1.SelectedItem.ToString();
+    
+
+            objPaciente = new Pacientes(num,"",textBox2.Text, dateTimePicker1.Text, sex,textBox4.Text,num4,num5,textBox10.Text, num1, num2,"","",10,"","");//cria
+            objPaciente.AcrescentaPaciente(objPaciente);//acrescenta
+            MessageBox.Show("Paciente Criado com Sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            //textBox7.Clear();
+            comboBox1.Refresh();
+
+            Stream stream = File.Open("dadosPaciente", FileMode.Append);
+            BinaryFormatter bformatter = new BinaryFormatter();
+            bformatter.Serialize(stream, objPaciente);//converte para binario
+            stream.Close();
+            this.Hide();
+          
+           
+            
+                      
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            criaSessa f = new criaSessa();
+            f.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

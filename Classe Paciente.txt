@@ -1,0 +1,254 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace projectFinal
+{
+    [Serializable]//conversao dos dados para uma utilizaçao universal
+   public class Pacientes
+   {
+       #region declaração variáveis
+       private int Codigo;
+       private string nomeF;
+       private string Nome;
+       private string DataNasc;
+       private string Sexo;
+       private string Rua;
+       private int CP;
+       private int CP1;
+       private string Localidade;
+       private int NumeroIdentificacao;
+       private int NumeroSaude;
+       private string SegSaude;
+       private int numSegSaude;
+       private string lSegSaude;
+       private string Diagnostico;
+       private string Frequencia;
+       private static Hashtable listaPaciente = new Hashtable();//construção da hashtable Paciente
+       #endregion
+
+
+      #region construtor
+       public Pacientes(int codigo, string nomef, string nome, string data, string sexo, string rua,int cp, int cp1, string localidade, int numId, int numS, string frenquencia, string segSaude,int numsegsaude, string lsegsaude, string diagnostico)
+       {
+           
+           Codigo = codigo;
+           nomeF = nomef;
+           Nome = nome;
+           DataNasc = data;
+           Sexo = sexo;
+           Rua = rua;
+           CP = cp;
+           CP1 = cp1;
+           Localidade = localidade;
+           NumeroIdentificacao = numId;
+           NumeroSaude = numS;
+           Frequencia = frenquencia;
+           SegSaude = segSaude;
+           numSegSaude = numsegsaude;
+           lSegSaude = lsegsaude;
+           Diagnostico = diagnostico;
+        
+           
+        }
+       #endregion
+
+      #region propriedas dos atributos
+       public int GetCodigo()
+      {
+          return Codigo;
+
+      }
+      public string GetnomeF()
+      {
+          return nomeF;
+
+      }
+      public string GetNome()
+      {
+          return Nome;
+      }
+      
+      public string GetData()
+      {
+          return DataNasc;
+      }
+      public string GetSexo()
+      {
+          return Sexo;
+      }
+      public string GetRua()
+      {
+          return Rua;
+      }
+      public int GetCP()
+      {
+          return CP;
+      }
+      public int GetCP1()
+      {
+          return CP1;
+      }
+      public string GetLocalide()
+      {
+          return Localidade;
+      }
+      public int GetNumeroIdentificacao()
+      {
+          return NumeroIdentificacao;
+      }
+      public int GetNumeroSaude()
+      {
+          return NumeroSaude;
+      }
+      public string GetFrequencia()
+      {
+          return Frequencia;
+      }
+        public string GetSegSaude()
+      {
+          return SegSaude;
+      }
+        public int GetnumSegSaude()
+        {
+            return numSegSaude;
+        }
+        public string GetlSegSaude()
+        {
+            return lSegSaude;
+        }
+        public string GetDiagnostico()
+        {
+            return Diagnostico;
+        }
+
+      
+       public Hashtable GetPaciente()
+       {
+           return listaPaciente;
+       }
+      public void SetCodigo(int cd)
+      {
+          Codigo = cd;
+      }
+      public void SetNome(string nm)
+      {
+          Nome = nm;
+      }
+      public void SetDataNasc(string dn)
+      {
+          DataNasc = dn;
+      }
+      public void SetSexo(string sx)
+      {
+          Sexo = sx;
+      }
+      public void SetRua(string ru)
+      {
+          Rua = ru;
+      }
+      public void SetCP(int cod)
+      {
+          CP = cod;
+      }
+      public void SetCP1(int cod1)
+      {
+          CP1 = cod1;
+      }
+      public void SetLocalidade(string loc)
+      {
+          Localidade = loc;
+      }
+      public void SetNumeroIdentificacao(int ni)
+      {
+          NumeroIdentificacao = ni;
+      }
+      public void SetNumSaude(int ns)
+      {
+          NumeroSaude = ns;
+      }
+      public void SetFrequencia(string fq)
+      {
+          Frequencia = fq;
+      }
+        public void SetSegSaude(string ss)
+      {
+          SegSaude = ss;
+      }
+        public void SetnumSegSaude(int nss)
+        {
+            numSegSaude = nss;
+        }
+        public void SetlSegSaude(string lss)
+        {
+            lSegSaude = lss;
+        }
+        public void SetDiagnostico(string dg)
+        {
+            Diagnostico = dg;
+        }
+       #endregion
+
+      #region  escrita dos dados para string
+      public override string ToString()
+       {
+           string str = "";
+           str += "Codigo: " + Codigo + "\r\n";
+           str += "Fisioterapeuta: " + nomeF + "\r\n";
+           str += "Nome: " + Nome + "\r\n";
+           str += "Data Nascimento: " + DataNasc + "\r\n";
+           str += "Sexo: " + Sexo + "\r\n";
+           str += "Rua: " + Rua + "\r\n";
+           str += "Código Postal: " + CP +"-" + CP1 + "\r\n";
+           str += "Localidade: " + Localidade + "\r\n";
+           str += "Número de Identificação: " + NumeroIdentificacao + "\r\n";
+           str += "Número de Saúde: " + NumeroSaude + "\r\n";
+           str += "Seguro de Saúde: " + SegSaude + "\r\n";
+           str += "Seguro de Saúde: " + numSegSaude + "-"+ lSegSaude +"\r\n";
+           str += "Diagnóstico: " + Diagnostico + "\r\n";
+           str += "Frequência de Sessões: " + Frequencia;
+          
+          return str;
+       }
+
+      #endregion 
+
+      #region função acrescenta
+      public void AcrescentaPaciente(Pacientes objPac)
+       {
+
+           listaPaciente.Add(objPac.GetCodigo(), objPac);
+           
+
+       }
+      #endregion
+
+      #region#region função mostra paciente
+      static public Hashtable mostraPaci()
+       {
+           return (listaPaciente);
+           
+
+       }
+
+      #endregion
+
+      #region #region função remover
+      static public bool RemovePaciente(int key)
+       {
+           try
+           {
+               listaPaciente.Remove(key);
+               return true;
+           }
+           catch { return false; }
+
+       }
+      #endregion
+   }
+}

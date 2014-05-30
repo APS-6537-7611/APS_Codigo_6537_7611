@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+using System.Collections;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace projectFinal
+{
+    public partial class criaSessa : Form
+    {
+        private sessao objSess;
+        public criaSessa()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
+            this.Hide();
+        }
+
+        private void criaSessa_Load(object sender, EventArgs e)
+        {
+            
+            
+            
+
+            string nomeF;
+            Hashtable p = Fisioterapeuta.mostraFisio();
+            foreach (Fisioterapeuta i in p.Values)
+            {
+                
+                nomeF = i.GetNome();
+                comboBox2.Items.Add(nomeF);
+            }
+            string nomeP;
+            Hashtable c = Pacientes.mostraPaci();
+            foreach (Pacientes i in c.Values)
+            {
+                nomeP = i.GetNome();
+                comboBox1.Items.Add(nomeP);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string aux1 = textBox1.Text.ToString();
+            int cod = int.Parse(aux1);
+            string data = dateTimePicker1.Text;
+            string nomeP=comboBox1.SelectedItem.ToString();
+            string nomeF=comboBox2.SelectedItem.ToString();
+            objSess = new sessao(cod,data,textBox2.Text, textBox3.Text,nomeP,nomeF, "");//cria
+            objSess.novaSessao(objSess);//acrescenta
+            MessageBox.Show("Sessao Criada com Sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            Stream stream = File.Open("dadosSessao", FileMode.Append);
+            BinaryFormatter bformatter = new BinaryFormatter();
+            bformatter.Serialize(stream, objSess);
+            stream.Close();
+            this.Hide();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            criaEquip a = new criaEquip();
+            a.Show();           
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

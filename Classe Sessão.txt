@@ -1,0 +1,137 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+
+namespace projectFinal
+{
+    [Serializable]
+    class sessao
+    {
+        #region declaraçao variaveis
+        private int Codigo;
+        private string Data;
+        private string Hora;
+        private string Duracao;
+        private string NomeP;
+        private string NomeF;
+        private string NomeE;
+        private static Hashtable listaSessoes = new Hashtable();
+
+        #endregion
+
+        #region construtor class
+        public sessao(int codigo, string data,string hora, string duracao, string nomeP,string nomeF, string nomeE)
+        {
+            Codigo = codigo;
+            NomeP = nomeP;
+            NomeF = nomeF;
+            Data = data;
+            Hora = hora;
+            Duracao = duracao;
+            NomeE = nomeE;
+        }
+        #endregion
+
+        #region funcao get e set - propriedades dos atributos
+        public int GetCodigo()
+            {
+                return Codigo;
+            }
+        public string GetNomeP()
+        {
+            return NomeP;
+        }
+        public string GetNomeF()
+        {
+            return NomeF;
+        }
+        public string GetData()
+        {
+            return Data;
+
+        }
+        public string GetHora()
+        {
+            return Hora;
+
+        }
+        public string GetDuracao()
+        {
+            return Duracao;
+
+        }
+        public string GetNomeE()
+        {
+            return NomeE;
+
+        }
+       
+        public Hashtable GetSessoes ()
+        {
+            return listaSessoes;
+        }
+        public void SetData(string dt)
+        {
+            Data = dt;
+        }
+        public void SetHora(string hr)
+        {
+            Hora = hr;
+        }
+        public void SetDuracao(string dr)
+        {
+            Duracao = dr;
+        }
+        public void SetCodigo(int cd)
+        {
+            Codigo = cd;
+        }
+        #endregion
+
+        #region escrita dos dados
+        public override string ToString()
+        {
+            string str = "";
+            str += "Codigo: " + Codigo + "\r\n";
+            str += "Data: " + Data + "\r\n";
+            str += "Hora: " + Hora + "\r\n";
+            str += "Duração: " + Duracao + "\r\n";
+            str += "Nome Paciente: " + NomeP + "\r\n";
+            str += "Nome Fisioterapeuta: " + NomeF + "\r\n";
+            str += "Equipamento: " + NomeE;
+            return str;
+        }
+        #endregion
+
+        #region funcao criar sessao
+        public void novaSessao(sessao sess)
+        {
+            listaSessoes.Add(sess.GetCodigo(), sess);
+
+        }
+        #endregion
+
+        #region funcao mostrar sessoes inseridas
+        static public Hashtable mostraSessao()
+        {
+            return (listaSessoes);
+        }
+        #endregion
+
+        #region remover sessao
+        static public bool RemoveSessao(int key)
+        {
+            try
+            {
+                listaSessoes.Remove(key);
+                return true;
+            }
+            catch { return false; }
+
+        }
+        #endregion
+    }
+}
